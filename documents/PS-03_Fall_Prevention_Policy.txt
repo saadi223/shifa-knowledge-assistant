@@ -1,0 +1,48 @@
+DEMO / SYNTHETIC HOSPITAL DATA — NOT FOR REAL CLINICAL USE
+======================================================================
+SHIFA GENERAL HOSPITAL (FICTIONAL)
+FALL PREVENTION POLICY
+======================================================================
+Document ID: PS-03
+Department: Patient Safety
+Version: 1.5
+Effective Date: 01 March 2026
+Owner: Patient Safety Officer
+
+1. PURPOSE
+----------
+This policy reduces the number of patient falls and the injuries caused by falls in all inpatient areas of SHIFA General Hospital.
+
+
+2. FALL RISK ASSESSMENT
+-----------------------
+Adult patients are assessed with the Morse Fall Scale on admission, after transfer to another ward, after any fall, after a significant change in condition, and at least once every shift. Children are assessed with the Humpty Dumpty scale.
+
+Morse Fall Scale interpretation:
+
+- Score 0 to 24: low risk.
+- Score 25 to 44: moderate risk.
+- Score 45 or above: high risk.
+
+3. PRECAUTIONS FOR HIGH-RISK PATIENTS
+-------------------------------------
+- Yellow fall-risk wristband (see PS-01) and a Fall Risk sign at the bedside.
+- Bed kept in the lowest position, brakes on, call bell within reach.
+- Non-slip footwear.
+- Hourly rounding by nursing staff, including offering help to use the toilet.
+- Patient and family are taught to call for help before getting out of bed.
+
+4. ACTION AFTER A FALL
+----------------------
+1. Do not move the patient until the nurse has assessed for injury.
+
+2. Notify the doctor immediately. The doctor must examine the patient within 30 minutes.
+
+3. Check vital signs and neurological status every 15 minutes for the first hour, every 30 minutes for the next 2 hours, then every 4 hours for 24 hours.
+
+4. Inform the family.
+
+5. File an incident report within 24 hours and hold a post-fall team huddle within 24 hours to find the cause and prevent a repeat.
+
+======================================================================
+DEMO / SYNTHETIC HOSPITAL DATA — NOT FOR REAL CLINICAL USE

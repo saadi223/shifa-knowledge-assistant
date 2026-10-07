@@ -1,0 +1,54 @@
+DEMO / SYNTHETIC HOSPITAL DATA — NOT FOR REAL CLINICAL USE
+======================================================================
+SHIFA GENERAL HOSPITAL (FICTIONAL)
+INPATIENT ADMISSION AND DISCHARGE PROCEDURE
+======================================================================
+Document ID: ADM-02
+Department: Admissions
+Version: 1.8
+Effective Date: 01 February 2026
+Owner: Manager - Patient Services
+
+A. PLANNED INPATIENT ADMISSION
+------------------------------
+1. The doctor writes the Admission Order and completes the Admission Form.
+
+2. The Admissions Desk (extension 1100) confirms registration and payer type and collects the deposit as per BF-01.
+
+3. Bed Management (extension 1150) allocates a bed.
+
+4. A porter escorts the patient to the ward.
+
+5. The ward nurse completes the admission nursing assessment within 1 hour of the patient reaching the ward. The ID wristband and allergy status are checked (see PS-01).
+
+6. The admitting doctor documents the initial assessment within 24 hours of admission. Emergency admissions are assessed by the ED doctor before transfer.
+
+7. The nurse orients the patient and family: call bell, visiting rules and belongings list. Valuables are handed to the family.
+
+
+B. VISITING HOURS
+-----------------
+- General wards: every day from 4:00 PM to 7:00 PM.
+- One attendant may stay with each patient 24 hours a day with an attendant pass.
+- ICU and CCU: every day from 5:00 PM to 6:00 PM, maximum 2 visitors at a time, 10 minutes each.
+- Children under 12 years are not allowed in ICU or wards for infection control reasons.
+
+C. DISCHARGE PROCEDURE
+----------------------
+1. The doctor writes the discharge order and discharge summary. For planned discharges the order must be written by 10:00 AM.
+
+2. The nurse does medication reconciliation with the pharmacy. Discharge medicines are dispensed at the Discharge Medication Counter (8:00 AM to 8:00 PM). Outside these hours the Inpatient Pharmacy dispenses them.
+
+3. The final bill is prepared within 2 hours of the discharge order (see BF-01). The attendant clears dues at the billing counter, extension 1700.
+
+4. The nurse gives discharge counselling: medicines, diet, warning signs and the follow-up appointment date.
+
+5. The patient leaves the ward with wheelchair assistance. Checkout time is 12:00 noon. The target is that the patient leaves within 3 hours of the discharge order.
+
+
+D. LEAVING AGAINST MEDICAL ADVICE (LAMA)
+----------------------------------------
+If a patient wishes to leave against medical advice, the treating doctor explains the risks. The patient or guardian signs the LAMA form in front of a witness. The hospital still provides a discharge summary and the medicines needed for a safe transition. Dues are settled as usual.
+
+======================================================================
+DEMO / SYNTHETIC HOSPITAL DATA — NOT FOR REAL CLINICAL USE
