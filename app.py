@@ -12,7 +12,7 @@ import os
 import streamlit as st
 
 from retriever import load_knowledge_base
-from rag_pipeline import get_groq_client, answer_question
+from rag_pipeline import get_groq_client, stream_answer
 from embedder import get_model as load_embedding_model
 
 
@@ -37,7 +37,7 @@ def get_knowledge_base():
 
 @st.cache_resource
 def get_embedding_model():
-    """all-MiniLM-L6-v2 model ek baar load karke cache mein rakhta hai."""
+    """Multilingual embedding model ek baar load karke cache mein rakhta hai."""
     return load_embedding_model()
 
 
@@ -141,16 +141,17 @@ if question:
     with st.chat_message("assistant"):
         with st.spinner("Documents search ho rahe hain..."):
             try:
-                result = answer_question(question, index, chunks_db, client, top_k=4)
+                stream, stream_state = stream_answer(question, index, chunks_db, client, top_k=4)
+                answer_text = st.write_stream(stream)
             except Exception:
                 st.error("The assistant could not complete that request. Please try again shortly.")
                 st.stop()
 
-        st.markdown(result["answer"])
+        cited_sources = stream_state["cited_sources"]
 
-        if result["cited_sources"]:
-            with st.expander(f"📚 Sources ({len(result['cited_sources'])})"):
-                for s in result["cited_sources"]:
+        if cited_sources:
+            with st.expander(f"📚 Sources ({len(cited_sources)})"):
+                for s in cited_sources:
                     st.markdown(f"**[{s['tag']}] {s['filename']}** — {s['department']}, Page {s['page']} "
                                 f"(relevance: {s['score']:.2f})")
                     st.caption(f"\"{s['excerpt']}\"")
@@ -158,6 +159,6 @@ if question:
     # Assistant ka message save karo
     st.session_state["messages"].append({
         "role": "assistant",
-        "content": result["answer"],
-        "sources": result["cited_sources"],
+        "content": answer_text,
+        "sources": cited_sources,
     })

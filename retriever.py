@@ -26,7 +26,7 @@ def _meaningful_query_terms(query):
     return {
         term.lower()
         for term in query.split()
-        if term.isalnum() and len(term) > 2 and term.lower() not in GENERIC_QUERY_TERMS
+        if term.isascii() and term.isalnum() and len(term) > 2 and term.lower() not in GENERIC_QUERY_TERMS
     }
 
 
@@ -47,7 +47,8 @@ def retrieve(query, index, chunks, top_k=3, min_score=DEFAULT_MIN_SCORE):
     Har result mein chunk ka text, metadata, aur uska similarity score (0 to 1) hota hai.
     """
     query_vector = embed_texts([query], show_progress=False).astype("float32")
-    scores, indices = index.search(query_vector, top_k)
+    candidate_k = min(index.ntotal, max(top_k * 3, top_k))
+    scores, indices = index.search(query_vector, candidate_k)
     query_terms = _meaningful_query_terms(query)
 
     results = []
@@ -65,7 +66,7 @@ def retrieve(query, index, chunks, top_k=3, min_score=DEFAULT_MIN_SCORE):
         chunk["score"] = float(score)
         results.append(chunk)
 
-    return results
+    return results[:top_k]
 
 
 if __name__ == "__main__":

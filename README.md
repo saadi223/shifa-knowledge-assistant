@@ -12,6 +12,8 @@ An Enterprise RAG (Retrieval-Augmented Generation) Knowledge Assistant for hospi
 - Answers staff questions across 16 hospital documents (Emergency, Admissions, Patient Safety, Pharmacy, Nursing, Billing & Finance)
 - Retrieves the most relevant document chunks using semantic search (FAISS + sentence embeddings)
 - Generates grounded answers using Groq LLM, strictly based on retrieved context
+- Streams answers into the chat interface as they are generated
+- Supports English, Urdu, and Roman Urdu questions with multilingual retrieval
 - Cites sources with filename, department, page number, and excerpt
 - Refuses to answer when the information isn't in the documents, instead of guessing
 
@@ -41,7 +43,7 @@ department, page, and excerpt metadata.
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-python build_index.py
+python build_index.py  # required after changing the embedding model or documents
 export GROQ_API_KEY="gsk_..."
 streamlit run app.py
 ```
@@ -64,8 +66,8 @@ retrieval is empty; it is not a substitute for evaluating the generated answer.
 
 ## Limitations and future work
 
-- The current embedding model is English-focused; multilingual Urdu and Roman
-	Urdu retrieval needs a multilingual embedding model and a rebuilt index.
+- Retrieval now uses a multilingual embedding model for Urdu and Roman Urdu;
+	answers still depend on the language capability of the selected Groq model.
 - Semantic retrieval can still find broadly related policy text for an
 	out-of-scope question. A BM25 hybrid search and cross-encoder reranker would
 	improve precision.
