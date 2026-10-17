@@ -7,6 +7,8 @@ Ye sirf PRE-BUILT knowledge_base/ (faiss.index + chunks.pkl) ko LOAD karta hai,
 jo build_index.py se Colab mein pehle hi bana chuka hai.
 """
 
+import os
+
 import streamlit as st
 
 from retriever import load_knowledge_base
@@ -42,10 +44,15 @@ def get_embedding_model():
 @st.cache_resource
 def get_client():
     """Groq client banata hai, API key Streamlit secrets se leta hai."""
-    api_key = st.secrets.get("GROQ_API_KEY")
+    api_key = os.environ.get("GROQ_API_KEY")
+    try:
+        api_key = st.secrets.get("GROQ_API_KEY", api_key)
+    except Exception:
+        # Local runs may not have a .streamlit/secrets.toml file.
+        pass
     if not api_key:
-        st.error("GROQ_API_KEY nahi mili. .streamlit/secrets.toml mein daalo (Colab/local) "
-                  "ya Streamlit Cloud ke Secrets settings mein daalo.")
+        st.error("GROQ_API_KEY was not found. Add it to Streamlit Cloud Secrets "
+                 "or export it as an environment variable.")
         st.stop()
     return get_groq_client(api_key)
 
@@ -133,7 +140,11 @@ if question:
     # Jawaab generate karo
     with st.chat_message("assistant"):
         with st.spinner("Documents search ho rahe hain..."):
-            result = answer_question(question, index, chunks_db, client, top_k=4)
+            try:
+                result = answer_question(question, index, chunks_db, client, top_k=4)
+            except Exception:
+                st.error("The assistant could not complete that request. Please try again shortly.")
+                st.stop()
 
         st.markdown(result["answer"])
 

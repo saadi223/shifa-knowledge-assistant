@@ -18,3 +18,58 @@ An Enterprise RAG (Retrieval-Augmented Generation) Knowledge Assistant for hospi
 ## Architecture
 
 **Build-time (run once, offline):**
+
+```text
+documents/ -> document_loader.py -> chunker.py -> embedder.py
+																			|                 |
+																			+----------> build_index.py
+																												|
+															knowledge_base/faiss.index + chunks.pkl
+
+User question -> semantic retrieval + lexical grounding gate
+							-> grounded Groq response -> parsed source citations
+```
+
+The Streamlit app loads the pre-built index and never re-processes documents at
+runtime. Retrieval rejects low-similarity or lexically unsupported context before
+the LLM call, and answers include citations such as `[S1]` that map to document,
+department, page, and excerpt metadata.
+
+## Setup
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python build_index.py
+export GROQ_API_KEY="gsk_..."
+streamlit run app.py
+```
+
+For Streamlit Cloud, add `GROQ_API_KEY` under **Settings -> Secrets**. Never
+commit the key. Local embeddings are downloaded once and cached by
+`sentence-transformers`.
+
+## Evaluation
+
+Run the offline retrieval benchmark without using Groq:
+
+```bash
+python evaluate.py
+```
+
+It reports answerable-question document hit rate and retrieval-level refusal
+accuracy from `evaluation_questions.csv`. The refusal metric checks whether
+retrieval is empty; it is not a substitute for evaluating the generated answer.
+
+## Limitations and future work
+
+- The current embedding model is English-focused; multilingual Urdu and Roman
+	Urdu retrieval needs a multilingual embedding model and a rebuilt index.
+- Semantic retrieval can still find broadly related policy text for an
+	out-of-scope question. A BM25 hybrid search and cross-encoder reranker would
+	improve precision.
+- The benchmark does not call the LLM, so citation correctness and generated
+	answer quality need a separate API-backed evaluation run.
+- The knowledge base is build-time only. An authenticated admin upload and
+	re-index workflow would be appropriate for production use.

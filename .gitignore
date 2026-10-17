@@ -1,6 +1,7 @@
 # Secrets - NEVER upload these
 .env
 .streamlit/secrets.toml
+streamlit_log.txt
 
 # Python / Colab clutter
 __pycache__/

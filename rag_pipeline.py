@@ -58,7 +58,12 @@ def extract_cited_sources(answer_text, tagged_chunks, excerpt_len=200):
     chunks ki structured citation list banata hai jo asal mein use hue.
     Agar LLM ne koi tag use hi nahi kiya (ya "not found" jawaab diya), khaali list aati hai.
     """
-    used_tags = set(re.findall(r"\[S(\d+)\]", answer_text))   # jaise {"1", "3"}
+    citation_groups = re.findall(r"\[S(\d+(?:\s*,\s*S?\d+)*)\]", answer_text, flags=re.IGNORECASE)
+    used_tags = {
+        number
+        for group in citation_groups
+        for number in re.findall(r"\d+", group)
+    }
 
     cited = []
     for chunk in tagged_chunks:
