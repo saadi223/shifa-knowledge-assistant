@@ -1,13 +1,13 @@
 """
 embedder.py  (Phase 5)
 Chunk ke text ko embeddings (numbers ki list) mein badalta hai, sentence-transformers
-ka 'all-MiniLM-L6-v2' model use karke. Ye wahi model hai jo build_index.py (Phase 6)
+ka multilingual model use karke. Ye wahi model hai jo build_index.py (Phase 6)
 aur app.py (Phase 10) dono mein use hoga, taaki numbers compare-able rahein.
 """
 
 from sentence_transformers import SentenceTransformer
 
-MODEL_NAME = "all-MiniLM-L6-v2"
+MODEL_NAME = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 
 _model = None   # model ek baar load hoke cache mein reh jaata hai (bar bar load na ho)
 

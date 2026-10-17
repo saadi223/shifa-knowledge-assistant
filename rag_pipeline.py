@@ -21,6 +21,7 @@ STRICT RULES:
 3. When you use information from a source, refer to it using its tag, like [S1] or [S2]. Cite every factual claim.
 4. This is a knowledge/policy assistant, not a medical diagnosis system. Do not give clinical advice beyond what is written in the policies.
 5. Be concise and direct. Use short paragraphs or bullet points where helpful.
+6. Answer in the same language as the staff question. If the question is in Urdu, answer in Urdu script. If it is in Roman Urdu, answer in clear Roman Urdu. Keep source tags such as [S1] unchanged.
 """
 
 
@@ -58,7 +59,12 @@ def extract_cited_sources(answer_text, tagged_chunks, excerpt_len=200):
     chunks ki structured citation list banata hai jo asal mein use hue.
     Agar LLM ne koi tag use hi nahi kiya (ya "not found" jawaab diya), khaali list aati hai.
     """
-    used_tags = set(re.findall(r"\[S(\d+)\]", answer_text))   # jaise {"1", "3"}
+    citation_groups = re.findall(r"\[S(\d+(?:\s*,\s*S?\d+)*)\]", answer_text, flags=re.IGNORECASE)
+    used_tags = {
+        number
+        for group in citation_groups
+        for number in re.findall(r"\d+", group)
+    }
 
     cited = []
     for chunk in tagged_chunks:
@@ -90,7 +96,6 @@ def answer_question(question, index, chunks_db, client, top_k=4, temperature=0.1
         "all_retrieved": list,         # debugging ke liye, sab retrieved chunks
     }
     """
-    # 1. Retrieve
     retrieved = retrieve(question, index, chunks_db, top_k=top_k)
 
     if not retrieved:
@@ -134,6 +139,55 @@ Answer the question using only the context above. Cite sources using their tags 
         "cited_sources": cited_sources,
         "all_retrieved": tagged_chunks,
     }
+
+
+def stream_answer(question, index, chunks_db, client, top_k=4, temperature=0.1):
+    """Return a text generator and mutable state for a streaming RAG response."""
+    state = {"cited_sources": [], "all_retrieved": []}
+
+    def generate():
+        retrieved = retrieve(question, index, chunks_db, top_k=top_k)
+        if not retrieved:
+            answer_text = "The answer could not be found in the available documents."
+            state["answer"] = answer_text
+            yield answer_text
+            return
+
+        context_text, tagged_chunks = build_context(retrieved)
+        state["all_retrieved"] = tagged_chunks
+        user_message = f"""Context from hospital documents:
+
+{context_text}
+
+---
+
+Staff question: {question}
+
+Answer the question using only the context above. Answer in the same language as the question. Cite sources using their tags like [S1], [S2]."""
+
+        response_stream = client.chat.completions.create(
+            model=GROQ_MODEL,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": user_message},
+            ],
+            temperature=temperature,
+            max_tokens=600,
+            stream=True,
+        )
+
+        parts = []
+        for event in response_stream:
+            content = event.choices[0].delta.content
+            if content:
+                parts.append(content)
+                yield content
+
+        answer_text = "".join(parts)
+        state["answer"] = answer_text
+        state["cited_sources"] = extract_cited_sources(answer_text, tagged_chunks)
+
+    return generate(), state
 
 
 def format_sources_display(cited_sources):
