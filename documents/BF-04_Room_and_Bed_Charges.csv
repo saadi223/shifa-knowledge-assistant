@@ -1,0 +1,13 @@
+# DEMO / SYNTHETIC HOSPITAL DATA — NOT FOR REAL CLINICAL USE
+# Title: Room and Bed Charges
+# Document ID: BF-04 | Department: Billing & Finance | Version: 2.0 | Effective: 01 June 2026 | Owner: Head of Finance
+room_type,daily_charge_pkr,deposit_required_pkr,includes,notes
+General Ward,4500,20000,"Bed, nursing care, basic meals",Shared ward
+Semi-Private Room,9000,35000,"Bed, nursing care, meals, attached bathroom",Two beds per room
+Private Room,15000,50000,"Bed, nursing care, meals, TV, attendant bed",Single patient
+Deluxe Suite,25000,75000,"Bed, nursing care, meals, TV, attendant bed, sitting area",Single patient
+High Dependency Unit (HDU),22000,75000,"Bed, close monitoring, nursing care",Medicines and procedures billed separately
+Intensive Care Unit (ICU),35000,100000,"Bed, continuous monitoring, intensive nursing care",Ventilator charges billed separately
+Coronary Care Unit (CCU),35000,100000,"Bed, cardiac monitoring, intensive nursing care",Procedures billed separately
+Neonatal ICU (NICU),40000,100000,"Incubator or cot, monitoring, neonatal nursing care",Ventilator charges billed separately
+Emergency Observation Bed,3000,0,Bed and nursing care for up to 6 hours,Charged per observation episode of up to 6 hours. No deposit required

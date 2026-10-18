@@ -1,0 +1,46 @@
+DEMO / SYNTHETIC HOSPITAL DATA — NOT FOR REAL CLINICAL USE
+======================================================================
+SHIFA GENERAL HOSPITAL (FICTIONAL)
+HIGH-ALERT MEDICATION GUIDELINES
+======================================================================
+Document ID: PH-02
+Department: Pharmacy
+Version: 2.2
+Effective Date: 01 April 2026
+Owner: Chief Pharmacist
+
+1. WHAT ARE HIGH-ALERT MEDICATIONS
+----------------------------------
+High-alert medications carry a higher risk of serious harm if used incorrectly. At SHIFA General Hospital the following are classified as high-alert:
+
+- Insulin
+- Heparin
+- Concentrated potassium chloride
+- Magnesium sulfate
+- Opioids
+- Chemotherapy agents
+- Neuromuscular blocking agents
+
+2. INDEPENDENT DOUBLE-CHECK
+---------------------------
+Two licensed nurses must independently check the drug, dose, route, patient identity and pump settings before any high-alert medicine is administered. Both nurses sign the medication chart.
+
+
+3. STORAGE RULES
+----------------
+- Concentrated potassium chloride is not stocked in general wards. It is kept locked and labelled only in the ICU and the Emergency Department.
+- High-alert medicines carry a HIGH ALERT sticker.
+- Look-alike sound-alike (LASA) medicines are stored apart from each other and written using Tall Man lettering.
+
+4. SPECIFIC RULES
+-----------------
+- Insulin: use only insulin syringes. Always write doses as the word units, never as U.
+- Heparin: use only the standard concentrations supplied by the pharmacy. Blood clotting tests (aPTT) are monitored as ordered.
+- Opioids: naloxone must be available in every ward.
+
+5. ERROR REPORTING
+------------------
+Every medication error or near miss is reported within 24 hours. An error that causes harm is reported immediately to the Pharmacy In-charge and the Patient Safety Officer (extension 1400).
+
+======================================================================
+DEMO / SYNTHETIC HOSPITAL DATA — NOT FOR REAL CLINICAL USE

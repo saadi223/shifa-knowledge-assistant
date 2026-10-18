@@ -1,0 +1,12 @@
+# DEMO / SYNTHETIC HOSPITAL DATA — NOT FOR REAL CLINICAL USE
+# Title: Accepted Payment Methods
+# Document ID: BF-02 | Department: Billing & Finance | Version: 1.4 | Effective: 01 June 2026 | Owner: Head of Finance
+payment_method,accepted_at,currency,limit_per_transaction_pkr,processing_fee,notes
+Cash,All billing counters and OPD Pharmacy,PKR,500000,None,"Cash above PKR 500,000 must be paid by bank transfer or cheque"
+"Debit Card (Visa, Mastercard, UnionPay)",All billing counters and pharmacies,PKR,No limit,None,PIN required
+"Credit Card (Visa, Mastercard)",All billing counters and pharmacies,PKR,No limit,1.5 percent of transaction,Fee is added to the bill
+Bank Transfer (IBFT / Raast),Main Billing Office only,PKR,No limit,None,Patient must show the transfer confirmation. Receipt is issued once the amount is credited
+Crossed Cheque,Main Billing Office (pre-approved corporate accounts only),PKR,No limit,None,Payable to SHIFA General Hospital. Needs Billing Supervisor approval
+"Mobile Wallet (JazzCash, Easypaisa)",Main Billing Office and OPD counters,PKR,100000,None,Show the payment confirmation message
+Insurance Panel (Cashless),Insurance Desk,PKR,As per pre-authorization,None,Requires pre-authorization. See BF-03
+Foreign Currency,Not accepted,-,-,-,Payments are accepted in PKR only
