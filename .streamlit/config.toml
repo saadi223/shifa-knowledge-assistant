@@ -1,0 +1,8 @@
+# Look and feel of the app (colours and font). Safe to commit: it contains no secrets.
+[theme]
+base = "light"
+primaryColor = "#0F766E"
+backgroundColor = "#F6FAF9"
+secondaryBackgroundColor = "#E6F2F0"
+textColor = "#14312E"
+font = "sans serif"
